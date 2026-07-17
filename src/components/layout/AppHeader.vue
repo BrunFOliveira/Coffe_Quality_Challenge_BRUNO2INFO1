@@ -3,11 +3,16 @@
 </script>
 
 <template>
-<header>
-  
+<header class="Header-CQC">
+
 </header>
 </template>
 
-<script scoped>
+<style scoped>
+header.Header-CQC {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
-</script>
+</style>
