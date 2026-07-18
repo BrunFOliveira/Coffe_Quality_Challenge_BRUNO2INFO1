@@ -4,8 +4,11 @@ import { RouterLink } from 'vue-router';
 
 <template>
 <header class="Header-CQC">
-  <div class="Titulo">
+
+    <div class="Titulo">
+      <RouterLink to="/" class="Link-Logo">
     <img src="/icons/vscode-icons_file-type-coffeescript.svg" alt="Icone-de-café" class="cafe">
+    </RouterLink>
   <h1>
     COFFE QUALITY<br>CHALLENGE
   </h1>
@@ -13,15 +16,15 @@ import { RouterLink } from 'vue-router';
   <nav>
     <div class="Home-1">
       <img src="/icons/material-symbols_home-rounded(1).svg" alt="Home" class="Icon-Nav">
-      <RouterLink to="/">HOME</RouterLink>
+      <RouterLink to="/" class="Nav-item">HOME</RouterLink>
     </div>
     <div class="Avaliacoes-1">
       <img src="/icons/material-symbols_fact-check-rounded(1).svg" alt="Avaliações" class="Icon-Nav">
-      <RouterLink to="/avaliacoes">AVALIAÇÕES</RouterLink>
+      <RouterLink to="/avaliacoes" class="Nav-item">AVALIAÇÕES</RouterLink>
     </div>
     <div>
       <img src="/icons/solar_ranking-bold(1).svg" alt="Ranking" class="Icon-Nav">
-      <RouterLink to="/ranking">RANKING</RouterLink>
+      <RouterLink to="/ranking" class="Nav-item">RANKING</RouterLink>
     </div>
   </nav>
   <img src="/icons/ic_round-account-circle.svg" alt="Perfil" class="Perfil">
@@ -29,8 +32,13 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style scoped>
+main {
+  position: relative;
+  z-index: 1;
+}
 header.Header-CQC {
-  position: fixed;
+  background-color: #fff;
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
@@ -40,8 +48,13 @@ header.Header-CQC {
   height: 5.5vw;
   border-bottom: 2px solid #f90505;
   display: flex;
+  z-index: 9999 !important;
 }
-img.cafe {
+.Link-Logo {
+  display: flex;
+  align-items: center;
+}
+.Link-Logo img.cafe {
   width: 4vw;
   height: auto;
   margin-right: 10px;
@@ -69,9 +82,10 @@ nav div {
   gap: 0.5vw;
   transition: opacity 0.2s ease;
   height: 100%;
+  box-sizing: border-box;
+  border-bottom: 3px solid transparent;
 }
 nav div:hover {
-  opacity: 0.7;
   border-bottom: 2px solid #6F4E37 ;
 }
 nav a {
@@ -80,6 +94,10 @@ nav a {
   color: #6F4E37;
   font-weight: bold;
   font-size: 1.5vw;
+  display: inline-block;
+  justify-content: center;
+  border-bottom: 3px solid transparent;
+  outline: none;
 }
 nav img.Icon-Nav {
   width: 2.2vw;
@@ -89,5 +107,8 @@ img.Perfil {
   width: 3vw;
   height: auto;
   margin-right: 1vw;
+}
+nav div:has(a.router-link-active) {
+  border-bottom: 3px solid #6F4E37;
 }
 </style>
