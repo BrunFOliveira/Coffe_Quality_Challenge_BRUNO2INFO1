@@ -1,14 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
+import { melhorCafeObjeto, ultimaAvaliacaoObjeto } from '@/data/cafes';
+import totalCafesAvaliados from '@/data/cafes';
 
-const totalAvaliacoes = ref(12);
-const maiorNota = ref(9.3);
-const tipoCafe = ref('Bourbon Amarelo');
-const localizacao = ref('Fazenda Boa Vista');
-const ultimaAvaliacao = ref(8.7);
-const nomeAvaliado = ref('Arara');
-const data = ref('25/05/2024 ' + '14:32');
 </script>
 
 <template>
@@ -31,26 +25,40 @@ const data = ref('25/05/2024 ' + '14:32');
           </div>
           <div>
             <h3>Total de cafés avaliados</h3>
-            <span class="numeroTotal">{{ totalAvaliacoes }}</span>
+            <span class="numeroTotal">{{ totalCafesAvaliados }}</span>
             <p>Cafés</p>
           </div>
         </li>
-        <li>
-          <img src="/icons/trofeu.svg" alt="" class="trofeu">
-          <div>
-            <h3>Café com maior nota</h3>
-          <span class="numeroAvaliacao">{{ maiorNota }}</span>
-          <span class="tipoCafé">{{ tipoCafe }}</span>
-            <span class="localização">{{ localizacao }}</span>
-          </div>
-        </li>
-        <li>
+        <li v-if="melhorCafeObjeto">
+  <img src="/icons/trofeu.svg" alt="" class="trofeu">
+  <div>
+    <h3>Café com maior nota</h3>
+    <span class="numeroAvaliacao">{{ melhorCafeObjeto.mediaSCA }}</span>
+    <span class="tipoCafé">{{ melhorCafeObjeto.nomeCafe }}</span>
+    <span class="localização">Produtor: {{ melhorCafeObjeto.produtor }}</span>
+  </div>
+</li>
+<li v-else>
+  <img src="/icons/trofeu.svg" alt="" class="trofeu" style="opacity: 0.5;">
+  <div>
+    <h3>Café com maior nota</h3>
+    <span class="tipoCafé">Nenhum avaliado</span>
+  </div>
+</li>
+         <li v-if="ultimaAvaliacaoObjeto">
           <img src="/icons/relogio.svg" alt="" class="relogio">
           <div>
             <h3>Última avaliação</h3>
-          <span class="ultimaAvaliacao">{{ ultimaAvaliacao }}</span>
-          <span class="nomeAvaliado">{{ nomeAvaliado }}</span>
-          <span class="data">{{ data }}</span>
+            <span class="ultimaAvaliacao">{{ ultimaAvaliacaoObjeto.mediaSCA }}</span>
+            <span class="nomeAvaliado">{{ ultimaAvaliacaoObjeto.nomeCafe }}</span>
+            <span class="data">{{ ultimaAvaliacaoObjeto.dataAvaliado }}</span>
+          </div>
+        </li>
+        <li v-else>
+          <img src="/icons/relogio.svg" alt="" class="relogio" style="opacity: 0.5;">
+          <div>
+            <h3>Última avaliação</h3>
+            <span class="nomeAvaliado">Nenhuma avaliação</span>
           </div>
         </li>
       </ul>
@@ -61,7 +69,7 @@ const data = ref('25/05/2024 ' + '14:32');
       </RouterLink>
       </div>
       <div class="aviso">
-        <img src="/public/icons/megafone.svg" alt="">
+        <img src="/icons/megafone.svg" alt="">
         <div>
           <h2>Participe e faça a diferença!</h2>
           <p>Cada avalição ajuda a reconhecer o trabalho dos produtores<br> e a valorizar o café de qualidade</p>
